@@ -1,4 +1,4 @@
-from Cards_on_board import *
+from scr.cards_on_board import *
 import unittest
 
 
