@@ -97,9 +97,6 @@ def write_output(filename, result):
     with open(file_path, "w") as file:
         file.write(str(result))
 
-    with open(file_path, "w") as file:
-        file.write(str(result))
-
 
 def find_shortest_safe_path(file_input, file_output):
     grid = read_input(file_input)
