@@ -1,5 +1,6 @@
-from scr.cards_on_board import *
 import unittest
+from src.cards_on_board import *
+
 
 
 class Test_some_methods(unittest.TestCase):

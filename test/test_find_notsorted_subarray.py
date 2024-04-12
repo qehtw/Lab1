@@ -1,4 +1,4 @@
-from scr.find_notsorted_subarray import *
+from src.find_notsorted_subarray import *
 import unittest
 
 
