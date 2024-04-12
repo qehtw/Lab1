@@ -59,6 +59,8 @@ def make_neighbors_zero(grid):
         position_neighbors = get_neighbors(grid, position[1], position[0])
         for y, x in position_neighbors:
             grid[x][y] = 0
+    if len(mines_positions) == 0:
+        return None
     return grid
 
 
@@ -66,6 +68,8 @@ def the_shortest_safe_path(grid):
     if not grid or not grid[0]:
         return -1
     grid_without_hidden_mines = make_neighbors_zero(grid)
+    if grid_without_hidden_mines is None:
+        return len(grid)
     start_points = find_start_points(grid_without_hidden_mines)
     if not start_points:
         return -1
