@@ -1,4 +1,4 @@
-from scr.balanced_tree import *
+from src.balanced_tree import *
 import unittest
 
 
