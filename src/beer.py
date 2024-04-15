@@ -1,5 +1,6 @@
 def beers(number_of_workers, beer_types, workers_loved_beer):
     workers_loved_beer = workers_loved_beer.split()
+    workers_loved_beer = sorted(workers_loved_beer, key=count_y)
     types_of_beer = 0
     beers_sett = []
 
@@ -24,4 +25,5 @@ def beers(number_of_workers, beer_types, workers_loved_beer):
     else:
         return types_of_beer
     
-print(beers(number_of_workers= 2 , beer_types= 3 , workers_loved_beer= 'NYY NNY'))  
+def count_y(string):
+    return string.count('Y')
