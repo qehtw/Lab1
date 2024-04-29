@@ -2,15 +2,14 @@ import unittest
 from src.cards_on_board import *
 
 
-
 class Test_some_methods(unittest.TestCase):
-    
+
     def test_size_of_board(self):
-        self.assertEqual(Size_of_board(4 , 1 , 1),2)
+        self.assertEqual(Size_of_board(4, 1, 1), 2)
 
     def test2_size_of_board(self):
-        self.assertEqual(Size_of_board(10 , 2 , 3),9)
+        self.assertEqual(Size_of_board(10, 2, 3), 9)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

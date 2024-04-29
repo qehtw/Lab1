@@ -35,4 +35,3 @@ class TestBFSShortMinesPath(unittest.TestCase):
             numbers = first_line.split()
 
         self.assertEqual(int(numbers[0]), -1)
-

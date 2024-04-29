@@ -8,8 +8,8 @@ def beers(number_of_workers, beer_types, workers_loved_beer):
         possible_sett = []
 
         for j in range(beer_types):
-            if workers_loved_beer[i][j] == 'Y':
-               possible_sett.append(j)
+            if workers_loved_beer[i][j] == "Y":
+                possible_sett.append(j)
 
         if len(possible_sett) == beer_types:
             continue
@@ -21,9 +21,10 @@ def beers(number_of_workers, beer_types, workers_loved_beer):
 
     if types_of_beer == 0:
         return 1
-    
+
     else:
         return types_of_beer
-    
+
+
 def count_y(string):
-    return string.count('Y')
+    return string.count("Y")
