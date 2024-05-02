@@ -32,8 +32,7 @@ class BinaryTree:
         node = self.root
         while node.left:
             node = node.left
-        return (node.priority)
-            
+        return node.priority
 
     def pop_element(self):
         if self.root is None:
@@ -46,8 +45,6 @@ class BinaryTree:
         else:
             node.left = self._pop_element(node.left)
             return node
-
-
 
     def show_in_order(self):
         self._show_in_order(self.root)
