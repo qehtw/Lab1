@@ -52,7 +52,3 @@ def calculate_minimal_length(file_name):
     print(information)
     result = min_length(information)
     return result
-
-
-
-print(calculate_minimal_length('communication_wells.csv'))
