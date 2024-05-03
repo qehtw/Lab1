@@ -1,5 +1,6 @@
 import os
 
+
 def read_input(file_name):
     """
     This function reads info from a CSV file.
@@ -11,28 +12,33 @@ def read_input(file_name):
 
     with open(file_path, "r") as file:
         for line in file:
-            values = line.strip().split(',')
+            values = line.strip().split(",")
             input_info.append(values)
 
     return input_info
 
+
 def min_length(information):
     """
     This function makes few moves:
-    1.Sort connections by values 
+    1.Sort connections by values
     2.Checks if all wells connected
-    3.If some wells don`t connected it returns -1 
+    3.If some wells don`t connected it returns -1
     4.Calculates minimal length
     """
     information.sort(key=lambda x: int(x[2]))
     visited = []
     length = 0
     for i in range(len(information)):
-        cheked_wells = [information[i][0] , information[i][1]]
+        cheked_wells = [information[i][0], information[i][1]]
         if cheked_wells in visited:
             continue
         else:
-            if cheked_wells[0] in visited or cheked_wells[1] in visited or visited == []:
+            if (
+                cheked_wells[0] in visited
+                or cheked_wells[1] in visited
+                or visited == []
+            ):
                 visited.append(information[i][0])
                 visited.append(information[i][1])
                 length += int(information[i][2])
@@ -43,10 +49,9 @@ def min_length(information):
     return length
 
 
-
 def calculate_minimal_length(file_name):
     """
-    This function activates all code 
+    This function activates all code
     """
     information = read_input(file_name)
     print(information)
