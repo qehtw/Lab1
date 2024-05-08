@@ -1,5 +1,5 @@
 import unittest
-from src.IoT_telecom import *
+from src.iot_telecom import *
 
 
 class TestIoTtelecom(unittest.TestCase):

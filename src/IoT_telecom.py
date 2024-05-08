@@ -18,34 +18,52 @@ def read_input(file_name):
     return input_info
 
 
-def min_length(information):
+class DisjointSet:
+    def __init__(self):
+        self.parent = {}
+
+    def find(self, x):
+        if x not in self.parent:
+            self.parent[x] = x
+            return x
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
+        if root_x != root_y:
+            self.parent[root_y] = root_x
+
+def is_connected(disjoint_set):
     """
-    This function makes few moves:
-    1.Sort connections by values
-    2.Checks if all wells connected
-    3.If some wells don`t connected it returns -1
-    4.Calculates minimal length
+    Checks if all wells connected
+    Returns True if all connected and False if doesn`t
     """
-    information.sort(key=lambda x: int(x[2]))
-    visited = []
+    num_roots = len(set(disjoint_set.find(node) for node in disjoint_set.parent))
+    
+    return num_roots == 1
+
+
+def min_length(connections):
+    """
+    This function calculates the minimal length of fiber
+    """
+    connections.sort(key=lambda x: int(x[2]))
+    disjoint_set = DisjointSet()
     length = 0
-    for i in range(len(information)):
-        cheked_wells = [information[i][0], information[i][1]]
-        if cheked_wells in visited:
-            continue
-        else:
-            if (
-                cheked_wells[0] in visited
-                or cheked_wells[1] in visited
-                or visited == []
-            ):
-                visited.append(information[i][0])
-                visited.append(information[i][1])
-                length += int(information[i][2])
-            else:
-                return -1
-    if visited == []:
+
+    for edge in connections:
+        well1, well2, distance = edge
+        if disjoint_set.find(well1) != disjoint_set.find(well2):
+            disjoint_set.union(well1, well2)
+            length += int(distance)
+
+    # Check if all wells are connected
+    if not is_connected(disjoint_set):
         return -1
+
     return length
 
 
@@ -53,7 +71,6 @@ def calculate_minimal_length(file_name):
     """
     This function activates all code
     """
-    information = read_input(file_name)
-    print(information)
-    result = min_length(information)
+    connections = read_input(file_name)
+    result = min_length(connections)
     return result
