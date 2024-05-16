@@ -108,8 +108,3 @@ def find_shortest_safe_path(file_input, file_output):
     write_output(file_output, result)
 
 
-def main():
-    find_shortest_safe_path("input.txt", "output.txt")
-
-
-main()

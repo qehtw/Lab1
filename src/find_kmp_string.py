@@ -14,18 +14,14 @@ def compute_prefix_function(needle):
 def kmp_match(haystack, needle):
     prefix_sufix_list = compute_prefix_function(needle)
     current_pos = 0
-    indices = []
+    indicators = []
     for i in range(len(haystack)):
         if current_pos > 0 and needle[current_pos] != haystack[i]:
             current_pos = prefix_sufix_list[current_pos - 1]
         if needle[current_pos] == haystack[i]:
             current_pos += 1
         if current_pos == len(needle):
-            indices.append(i - len(needle) + 1)
+            indicators.append(i - len(needle) + 1)
             current_pos = prefix_sufix_list[current_pos - 1]
-    return indices
+    return indicators
 
-
-haystack = "ababcbcbabcabdcabcabc"
-needle = "abcabd"
-print(kmp_match(haystack, needle))
