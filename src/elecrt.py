@@ -13,7 +13,7 @@ def read_input(file_name):
 
     with open(file_path, "r") as file:
         for line in file:
-            values = list(map(int, line.strip().split(" ")))
+            values = list(map(int, line.strip().split(" ")))    
             input_info.append(values)
 
     return input_info
@@ -40,39 +40,32 @@ def check_closer(next_heigth, current_heigth):
         return 1
 
 
-def calculate_worst_scenario(pillars):
+def calculate_worst_scenario(pillars, distance):
     """
     This function creates worst possible heights of pillars
     """
     i = 0
     new_heigths_of_pillars = pillars
-
+    total_length = 0
     for i in range(0, len(pillars) - 1):
         if new_heigths_of_pillars[i] > new_heigths_of_pillars[i + 1]:
             new_heigths_of_pillars[i + 1] = 1
+            length = math.sqrt((new_heigths_of_pillars[i] - new_heigths_of_pillars[i + 1]) ** 2 + distance**2)
+            total_length += length
             continue
 
         if new_heigths_of_pillars[i] == 1:
+            length = math.sqrt((new_heigths_of_pillars[i] - new_heigths_of_pillars[i + 1]) ** 2 + distance**2)
+            total_length += length
             continue
 
         if check_closer(new_heigths_of_pillars[i + 1], new_heigths_of_pillars[i]) == 1:
             new_heigths_of_pillars[i + 1] = 1
+            length = math.sqrt((new_heigths_of_pillars[i] - new_heigths_of_pillars[i + 1]) ** 2 + distance**2)
+            total_length += length
             continue
 
-    return new_heigths_of_pillars
-
-
-def find_length_of_cabel(distance, new_pillars):
-    """
-    This function calculates lengths of cabel that we might need
-    """
-
-    total_length = 0
-    number_of_pillars = len(new_pillars)
-    for i in range(0, number_of_pillars - 1):
-        length = math.sqrt((new_pillars[i] - new_pillars[i + 1]) ** 2 + distance**2)
-        total_length += length
-    return round(total_length, 2)
+    return round(total_length,2)
 
 
 def start_code(file_name):
@@ -85,5 +78,5 @@ def start_code(file_name):
     pillars = data_from_file[1]
     if data_check(distance, pillars) == False:
         return False
-    new_pillars = calculate_worst_scenario(pillars)
-    return find_length_of_cabel(distance, new_pillars)
+    new_pillars = calculate_worst_scenario(pillars ,distance)
+    return new_pillars
