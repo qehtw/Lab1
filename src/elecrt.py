@@ -75,12 +75,12 @@ def find_length_of_cabel(distance, new_pillars):
     return round(total_length, 2)
 
 
-def start_code():
+def start_code(file_name):
     """
     This function start code
     """
 
-    data_from_file = read_input("electr_input.txt")
+    data_from_file = read_input(file_name)
     distance = data_from_file[0][0]
     pillars = data_from_file[1]
     if data_check(distance, pillars) == False:
