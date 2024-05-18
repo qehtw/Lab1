@@ -72,4 +72,5 @@ def calculate_minimal_length(file_name):
     """
     connections = read_input(file_name)
     result = min_length_connection(connections)
+
     return result
