@@ -46,7 +46,7 @@ def is_connected(disjoint_set):
     return num_roots == 1
 
 
-def min_length(connections):
+def min_length_connection(connections):
     """
     This function calculates the minimal length of fiber
     """
@@ -60,7 +60,6 @@ def min_length(connections):
             disjoint_set.union(well1, well2)
             length += int(distance)
 
-    # Check if all wells are connected
     if not is_connected(disjoint_set):
         return -1
 
@@ -72,5 +71,6 @@ def calculate_minimal_length(file_name):
     This function activates all code
     """
     connections = read_input(file_name)
-    result = min_length(connections)
+    result = min_length_connection(connections)
+
     return result
