@@ -44,28 +44,29 @@ def calculate_worst_scenario(pillars, distance):
     """
     This function creates worst possible heights of pillars
     """
-    i = 0
-    new_heigths_of_pillars = pillars
-    total_length = 0
-    for i in range(0, len(pillars) - 1):
-        if new_heigths_of_pillars[i] > new_heigths_of_pillars[i + 1]:
-            new_heigths_of_pillars[i + 1] = 1
-            length = math.sqrt((new_heigths_of_pillars[i] - new_heigths_of_pillars[i + 1]) ** 2 + distance**2)
-            total_length += length
-            continue
 
-        if new_heigths_of_pillars[i] == 1:
-            length = math.sqrt((new_heigths_of_pillars[i] - new_heigths_of_pillars[i + 1]) ** 2 + distance**2)
-            total_length += length
-            continue
+    heights = len(pillars)
 
-        if check_closer(new_heigths_of_pillars[i + 1], new_heigths_of_pillars[i]) == 1:
-            new_heigths_of_pillars[i + 1] = 1
-            length = math.sqrt((new_heigths_of_pillars[i] - new_heigths_of_pillars[i + 1]) ** 2 + distance**2)
-            total_length += length
-            continue
+    value_bottom = 0
+    value_top = 0
 
-    return round(total_length,2)
+    for pillar in range(1, heights):
+        
+        previous_bottom_to_current_bottom = value_bottom + math.sqrt(distance ** 2 + (1 -1) ** 2)
+        preevious_top_to_current_bottom = value_top + math.sqrt(distance ** 2 + (1 - pillars[pillar-1]) ** 2)
+        current_value_bottom = max(previous_bottom_to_current_bottom, preevious_top_to_current_bottom)
+        
+        previous_bottom_to_current_top = value_bottom + math.sqrt(distance ** 2 + (pillars[pillar] - 1) ** 2)
+        previous_top_to_current_top = value_top + math.sqrt(distance ** 2 + (pillars[pillar] - pillars[pillar - 1]) ** 2)
+        current_value_top = max(previous_bottom_to_current_top, previous_top_to_current_top)
+
+        value_bottom = current_value_bottom
+        value_top = current_value_top
+
+    wire_lenght = round(max(value_top, value_bottom), 2)
+
+    return wire_lenght
+
 
 
 def start_code(file_name):
@@ -80,3 +81,6 @@ def start_code(file_name):
         return False
     new_pillars = calculate_worst_scenario(pillars ,distance)
     return new_pillars
+
+
+print( start_code('electr_input.txt'))
